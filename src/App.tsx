@@ -6,9 +6,9 @@ import { TodoList } from './components/TodoList';
 import { useState } from 'react';
 
 const todoUser = todosFromServer.map(todo => {
-  const user = usersFromServer.find(us => todo.userId === us.id);
+  const foundUser = usersFromServer.find(user => todo.userId === user.id);
 
-  return { ...todo, user: user };
+  return { ...todo, foundUser };
 });
 
 export const App = () => {
@@ -63,7 +63,7 @@ export const App = () => {
 
       <form action="/api/todos" method="POST" onSubmit={handleAdd}>
         <div className="field">
-          <label htmlFor="user-select">Title: </label>
+          <label htmlFor="user-selected">Title: </label>
           <input
             type="text"
             data-cy="titleInput"
