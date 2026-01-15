@@ -1,4 +1,4 @@
-import { User } from './UserInterfase';
+import { User } from './UserInterface';
 
 export interface Todo {
   id: number;
