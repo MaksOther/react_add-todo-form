@@ -8,7 +8,7 @@ import { useState } from 'react';
 const todoUser = todosFromServer.map(todo => {
   const foundUser = usersFromServer.find(user => todo.userId === user.id);
 
-  return { ...todo, foundUser };
+  return { ...todo, user: foundUser };
 });
 
 export const App = () => {
@@ -39,15 +39,15 @@ export const App = () => {
       return;
     }
 
-    const user = usersFromServer.find(u => u.id === userId);
+    const findUser = usersFromServer.find(user => user.id === userId);
 
-    const newId = Math.max(...todos.map(t => t.id), 0) + 1;
+    const newId = Math.max(...todos.map(todo => todo.id), 0) + 1;
 
     const newTodo = {
       id: newId,
       title: title,
       userId: userId,
-      user: user,
+      user: findUser,
       completed: false,
     };
 
@@ -66,6 +66,7 @@ export const App = () => {
           <label htmlFor="user-selected">Title: </label>
           <input
             type="text"
+            id="title-input"
             data-cy="titleInput"
             placeholder="Enter a title"
             value={title}
